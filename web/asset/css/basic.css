@@ -1,0 +1,8 @@
+.list_el
+{
+	cursor:pointer;
+}
+.list_el:hover
+{
+	color:blue;
+}
