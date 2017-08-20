@@ -51,8 +51,9 @@ Or $CaptchaTools = Model::factory('Model\tools'); if Model tools lying in applli
 We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters.
 
 To use filters in a View, 3d unnecessary parameter was added to View::factory function
-
+```
 $html = View::factory('index',$data, true);
+```
 by default it has value - false. To enable filters in a view - set this parameter to any value that !=false. 1 or true.
 or define  constant
 define('VIEWS_FILTERS',1);
