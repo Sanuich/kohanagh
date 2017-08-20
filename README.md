@@ -1,6 +1,6 @@
-#Kohana Golden Hair (based on Kohana Framework 3.3.5 version)
+# Kohana Golden Hair (based on Kohana Framework 3.3.5 version)
 
-##About
+##  About
 Kohana Golden Hair is fork of Kohana Framework, based on Kohana 3.3.5 Framework.
 
 Kohana Golden Hair is using NAMESPACES and supporting latest PSR-4 standart.
@@ -11,7 +11,7 @@ Released under a BSD license. Kohana framework and it's fork - Golden Hair can b
 
 Pagination module also added.
 
-##The major changes:
+##  The major changes:
 
 - **[Autoloader]** rewrited to [PSR-4] standart, that means that all classes should be declared in a namespaces.
 
@@ -29,7 +29,7 @@ Pagination module also added.
 
 All modules was reworked for maximal compatibility with old code but Some of them still need to be tested.
 
-###Namespaces AND PSR-4
+###  Namespaces AND PSR-4
 New autoloader rewritten to seek classes files by namespace. 
 Underscore in class name now allowed. 
 All classes that only extends different classes where removed.
@@ -46,7 +46,7 @@ Like: $CaptchaTools = Model::factory('Sanuich\Captcha\Model\tools');
 where Sanuich is a vendor's name, Capthcha is a Application name, Model is a part of path where Model is file tools.php
 Or $CaptchaTools = Model::factory('Model\tools'); if Model tools lying in appllication\classes\Models folder
 
-###Views Filters
+###  Views Filters
 
 We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters.
 
@@ -60,7 +60,7 @@ in index file or bootstrap file.
 
 For now there are [escape] [data] and [datastr] filters. For more details see [kohanagoldenhair.xyz](https://kohanagoldenhair.xyz)
 
-###Bundles
+###  Bundles
 Bundles is a new module for this Framework that allows to create separated applications in a public folder.
 
 It is similar to modules, almost like modules, just allows to create each bundle in a public\bundles\vendor\bundle_name folder
@@ -74,7 +74,7 @@ Some bundles added to default project:
 - **Sanuich\Database** - Some additional sugar: new bundle Sanuich\Database that contains module Database with many useful functions to work with database
 There's a leak of documentation but default application in a app\classes folder is not empty.
 
-####How ot use Database Bundle
+####  How ot use Database Bundle
 $SanuichDB = Model::factory('Sanuich\Database\Model\DB'); 
 some of the functions:
 dbrow($q); select with query $q and return one first row of result or false
