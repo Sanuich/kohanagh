@@ -21,7 +21,7 @@ Pagination module also added.
 
 - **Kohana\Exception** (old Kohana_Kohana_Exception), all functions that received parameter Exception $e have been replaced to just $e. If you are extending the class verify you have the same.
 
-- **Module encrypt**, now encryption works as a module. If you are using new Encrypt or similar you need to enable the module in your bootstrap ex: 'encrypt' => MODPATH.'Kohana\encrypt'.
+- **Module encrypt**, now encryption works as a module. If you are using new Encrypt or similar you need to enable the module in your bootstrap ex: ```'encrypt' => MODPATH.'Kohana\encrypt'```.
 
 - **Kohana\ORM module** fixed to work with PDO database driver.
 
@@ -35,28 +35,39 @@ Underscore in class name now allowed.
 All classes that only extends different classes where removed.
 For example, there's no more Kohana class that extends Kohana_Core class.
 Instead of this need to declare
+```
 use Kohana\Core as Kohana;
+```
 in every file where this class is used, e.t.c.
 
 As file_seek function was also rewritten, Controller,Module and Views folder names now up to user.
 In applications classes - controllers names now should be placed in a Controller namespace that should be the same as Controller folder name
 
 When creating Instances of Models and other classes need to provide full Classname with namespace.
-Like: $CaptchaTools = Model::factory('Sanuich\Captcha\Model\tools');
+Like: 
+```
+$CaptchaTools = Model::factory('Sanuich\Captcha\Model\tools');
+```
 where Sanuich is a vendor's name, Capthcha is a Application name, Model is a part of path where Model is file tools.php
-Or $CaptchaTools = Model::factory('Model\tools'); if Model tools lying in appllication\classes\Models folder
+Or 
+```
+$CaptchaTools = Model::factory('Model\tools');
+```
+ if Model tools lying in appllication\classes\Models folder
 
 ###  Views Filters
 
 We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters.
 
-To use filters in a View, 3d unnecessary parameter was added to View::factory function
+To use filters in a View, 3d unnecessary parameter was added to ```View::factory``` function
 ```
 $html = View::factory('index',$data, true);
 ```
 by default it has value - false. To enable filters in a view - set this parameter to any value that !=false. 1 or true.
 or define  constant
+```
 define('VIEWS_FILTERS',1);
+```
 in index file or bootstrap file to enable filters in all Views by default.
 
 For now there are [escape] [data] and [datastr] filters. For more details see [kohanagoldenhair.xyz](https://kohanagoldenhair.xyz)
@@ -76,7 +87,9 @@ Some bundles added to default project:
 There's a leak of documentation, but default application in a app\classes folder is not empty.
 
 ####  How ot use Database Bundle
+```
 $SanuichDB = Model::factory('Sanuich\Database\Model\DB'); 
+```
 some of the functions:
 dbrow($q); select with query $q and return one first row of result or false
 dbidselect($q); select with query $q and return array associated with value of id column
