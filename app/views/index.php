@@ -3,7 +3,7 @@
 <div class="col-md-12">
 <h1>Kohana Golden Hair (based on Kohana Framework 3.3.5 version)</h1>
 <p></p>
-<h2><a href="/kohana.gh.zip" download>Download zip</a></h2>
+<h2><a href="https://github.com/Sanuich/kohanagh/archive/master.zip" download>Download zip</a></h2>
 <p></p>
 <div >Now on <a href="https://github.com/Sanuich/kohanagh" class="btn">GitHub</a></div>
 <p></p>
