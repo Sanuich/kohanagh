@@ -33,7 +33,7 @@ class Welcome extends Controller\Template {
 		Cache::instance()->set('image', '1', Date::HOUR * 1);
 		$image = Cache::instance()->get('image');
 
-		$SanuichDB = Model::factory('Sanuich\Database\Model\DB');
+		//$SanuichDB = Model::factory('Sanuich\Database\Model\DB');
 		//$users = $SanuichDB->dbselect("SELECT * FROM users");
 		
 		//$crypt = \Kohana\Encrypt::instance();
@@ -48,7 +48,7 @@ class Welcome extends Controller\Template {
 		//$twig = Twig::factory('index');
 		//$twig->name = 'Tom';
 		
-		$user = ORM::factory('user',1);
+		//$user = ORM::factory('User',1);
 
 		$CaptchaTools = Model::factory('Sanuich\Captcha\Model\tools');
 		$captcha = $CaptchaTools->generatePassword(6,6);

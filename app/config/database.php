@@ -30,7 +30,7 @@ return array
 		'profiling'    => TRUE,
 	),
 	'default' => array(
-		'type'       => 'pdo',
+		'type'       => 'PDO',
 		'connection' => array(
 			/**
 			 * The following options are available for PDO:

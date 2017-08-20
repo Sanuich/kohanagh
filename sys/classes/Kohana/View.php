@@ -28,6 +28,7 @@ class View {
 	 *
 	 * @param   string  $file   view filename
 	 * @param   array   $data   array of values
+	 
 	 * @return  View
 	 */
 	public static function factory($file = NULL, array $data = NULL, $filters = NULL)
@@ -240,7 +241,7 @@ class View {
 		}
 		
 		//set filters mode
-		if(defined('VIEWS_FILTERS')) $this->_filters = !empty(VIEWS_FILTERS);
+		if(defined('VIEWS_FILTERS')) $this->_filters = (VIEWS_FILTERS!=false);
 		if($filters !== NULL) $this->_filters = !empty($filters);
 	}
 
