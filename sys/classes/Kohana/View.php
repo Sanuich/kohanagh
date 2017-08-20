@@ -30,9 +30,9 @@ class View {
 	 * @param   array   $data   array of values
 	 * @return  View
 	 */
-	public static function factory($file = NULL, array $data = NULL)
+	public static function factory($file = NULL, array $data = NULL, $filters = NULL)
 	{
-		return new self($file, $data);
+		return new self($file, $data, $filters);
 	}
 
 	/**
@@ -47,7 +47,7 @@ class View {
 	 * @return  string
 	 * @throws  Exception
 	 */
-	protected static function capture($kohana_view_filename, array $kohana_view_data)
+	protected static function capture($kohana_view_filename, array $kohana_view_data, $kohana_view_filters)
 	{
 		// Import the view variables to local namespace
 		extract($kohana_view_data, EXTR_SKIP);
@@ -57,14 +57,94 @@ class View {
 			// Import the global view variables to local namespace
 			extract(self::$_global_data, EXTR_SKIP | EXTR_REFS);
 		}
-
+		
+		//new
+		if(!empty($kohana_view_filters))
+		{
+			$var = "\\$(.*)";
+			$str = "[\"{1}\'{1}](.*)[\"{1}\'{1}]";
+			$date_format = '"Y/m/d"';
+			$filters = [
+			'escape'=>['pattern'=>"escape",
+				'replace'=>[
+					'var'=>"htmlspecialchars(\$$1, ENT_QUOTES, 'UTF-8')",
+					'str'=>"htmlspecialchars(\"$1\", ENT_QUOTES, 'UTF-8')"
+					]
+				],
+			'datestr'=>['pattern'=>"datestr\((.+)\)",
+				'replace'=>[
+					'var'=>"date($2, strtotime(\$$1))",
+					'str'=>"date($2, strtotime(\"$1\"))"
+					]
+				],
+			'datestr_default'=>['pattern'=>"datestr\(\)",
+				'replace'=>[
+					'var'=>"date(".$date_format.", strtotime(\$$1))",
+					'str'=>"date(".$date_format.", strtotime(\"$1\"))"
+					]
+				],
+			'datestr_solo'=>['pattern'=>"datestr",
+				'replace'=>[
+					'var'=>"date(".$date_format.", strtotime(\$$1))",
+					'str'=>"date(".$date_format.", strtotime(\"$1\"))"
+					]
+				],
+			'date'=>['pattern'=>"date\((.+)\)",
+				'replace'=>[
+					'var'=>"date($2, \$$1)",
+					'str'=>"date($2, strtotime(\"$1\"))"
+					]
+				],
+			'date_default'=>['pattern'=>"date\(\)",
+				'replace'=>[
+					'var'=>"date(".$date_format.", \$$1)",
+					'str'=>"date(\"Y/m/d\", strtotime(\"$1\"))"
+					]
+				],
+			'date_solo'=>['pattern'=>"date",
+				'replace'=>[
+					'var'=>"date(".$date_format.", \$$1)",
+					'str'=>"date(\"Y/m/d\", strtotime(\"$1\"))"
+					]
+				],
+			'strong'=>['pattern'=>"strong",
+				'replace'=>[
+					'var'=>"<strong><?=$1?></strong>",
+					'str'=>"<strong>$1</strong>"
+					]
+				]				
+			];
+		$view_code = file_get_contents($kohana_view_filename);
+		//escape escape ))
+		$view_code = preg_replace("/([\"\'].*)(\|escape)(.*[\"\']\|escape)/","$1###escape###$3", $view_code);
+		$view_code = preg_replace("/(htmlspecialchars\([\"\'].*)(\|escape)(.*[\"\']\))/","$1###escape###$3", $view_code);
+		
+		$view_code = preg_replace("/([\"\'].*)(\|date)(.*[\"\']\|escape)/","$1###date###$3", $view_code);
+		$view_code = preg_replace("/(htmlspecialchars\([\"\'].*)(\|date)(.*[\"\']\))/","$1###date###$3", $view_code);
+		
+		//filters
+		foreach($filters as $fname=>$filter)
+		{
+			$view_code = preg_replace("/".$str."\|".$filter['pattern']."/",$filter['replace']['str'], $view_code);
+			$view_code = preg_replace("/".$var."\|".$filter['pattern']."/",$filter['replace']['var'], $view_code);
+			
+		}
+		//unescape escape
+		
+		//echo htmlspecialchars($view_code); die();
+		$view_code = str_ireplace("###escape###","|escape",$view_code);
+		$view_code = str_ireplace("###date###","|date",$view_code);
+		}
 		// Capture the view output
 		ob_start();
 
 		try
 		{
 			// Load the view within the current scope
-			include $kohana_view_filename;
+			if(!empty($kohana_view_filters))
+				eval("?>".$view_code);
+			else
+				include $kohana_view_filename;
 		}
 		catch (\Exception $e)
 		{
@@ -132,6 +212,8 @@ class View {
 
 	// Array of local variables
 	protected $_data = array();
+	
+	protected $_filters = false;
 
 	/**
 	 * Sets the initial view filename and local data. Views should almost
@@ -141,9 +223,10 @@ class View {
 	 *
 	 * @param   string  $file   view filename
 	 * @param   array   $data   array of values
+	 * @param   boolean/integer  $filters  enable/disable filters in a view capture
 	 * @uses    View::set_filename
 	 */
-	public function __construct($file = NULL, array $data = NULL)
+	public function __construct($file = NULL, array $data = NULL, $filters = NULL)
 	{
 		if ($file !== NULL)
 		{
@@ -155,6 +238,10 @@ class View {
 			// Add the values to the current data
 			$this->_data = $data + $this->_data;
 		}
+		
+		//set filters mode
+		if(defined('VIEWS_FILTERS')) $this->_filters = !empty(VIEWS_FILTERS);
+		if($filters !== NULL) $this->_filters = !empty($filters);
 	}
 
 	/**
@@ -363,7 +450,7 @@ class View {
 		}
 
 		// Combine local and global data and capture the output
-		return self::capture($this->_file, $this->_data);
+		return self::capture($this->_file, $this->_data, $this->_filters);
 	}
 
 }

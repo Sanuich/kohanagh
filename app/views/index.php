@@ -3,8 +3,9 @@
 <div class="col-md-12">
 <h1>Kohana Golden Hair (based on Kohana Framework 3.3.5 version)</h1>
 <p></p>
-<h2><a href="/kohana.gh.zip" download>Download</a></h2>
-<p>Soon on Github...</p>
+<h2><a href="/kohana.gh.zip" download>Download zip</a></h2>
+<p></p>
+<div >Now on <a href="https://github.com/Sanuich/kohanagh" class="btn">GitHub</a></div>
 <p></p>
 <h2>About</h2>
 <p>Kohana Golden Hair is fork of Kohana Framework, based on Kohana 3.3.5 Framework.</p>
@@ -21,6 +22,7 @@
 <li><strong>Kohana\Exception (old Kohana_Kohana_Exception)</strong>, all functions that received parameter Exception $e have been replaced to just $e. If you are extending the class verify you have the same.</li>
 <li><b>Module encrypt</b>, now encryption works as a module,<br> if you are using new Encrypt or similar you need to enable the module in your bootstrap ex: 'encrypt' => MODPATH.'Kohana\encrypt',</li>
 <li><strong>Kohana\ORM</strong> module fixed to work with PDO database driver</li>
+<li><strong><a href="#filters">Views Filters</a></strong>. View class was extended with Filters (like Smarty or Twig).</li>
 </ol>
 <p>All modules was reworked for maximal compatibility with old code but Some of them still need to be tested. For example </p>
 
@@ -39,7 +41,68 @@ in every file where this class is used, e.t.c.
 <p>When creating Instances of Models and other classes need to provide full Classname with namespace.<br>
 Like: <code>$CaptchaTools = Model::factory('Sanuich\Captcha\Model\tools');</code><br>
 where Sanuich is a vendor's name, Capthcha is a Application name, Model is a part of path where Model is file tools.php<br>Or <code>$CaptchaTools = Model::factory('Model\tools');</code> if Model tools lying in appllication\classes\Models folder</p>
+<p></p>
+<div id="filters"></div>
+<h2>Views Filters</h2>
+<p>So Twig sais: <br><cite>The PHP language is verbose and becomes ridiculously verbose when it comes to output escaping<br>Twig has a very concise syntax, which make templates more readable</cite></p>
+<h3>escape</h3>
+<p>We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters</p>
+<p>To use filters in a View third unnecessary parameter wath added to View::factory function</p>
+<code>
+$html = View::factory('index',$data, true);
+</code>
+<p>by default it has value  - false. To enable filters in a view - set this parameter to any value that !=false. 1 or true.</p>
+<h3>Escape</h3>
+<p>Here is example of use escape filter</p>
+<code><?=$code[0]|escape?></code><br>
+instead of<br>
+<code><?=$code[1]|escape?></code><br>
+<p><strong>escape</strong> filter may be applied to variable or string. Any filter itself also may be filtered inside a text. But only one.</p>
+<p></p>
+<h3>By the way!</h3>
+twig:<br>
+<code><?=htmlspecialchars("<h1>Members</h1>");?><br>
+<?=htmlspecialchars("<ul>");?><br>
+<?=htmlspecialchars(" {% for user in users %}");?><br>
+<?=htmlspecialchars("  <li>{{ user.username }}</li>");?><br>
+<?=htmlspecialchars(" {% endfor %}");?><br>
+<?=htmlspecialchars("</ul>");?>
+</code><br>
+PHP:<br>
+<code><?="<h1>Members</h1>"|escape;?><br>
+<?="<ul>"|escape;?><br>
+<?=" <? foreach(\$users as \$user){?>"|escape;?><br>
+<?="  <li><?=\$user['username']?></li>"|escape;?><br>
+<?=" <? }?>"|escape;?><br>
+<?="</ul>"|escape;?>
+</code><br>
+<p>In notepad++ (and other editors) symbols { and } - hilighted. So working with PHP code this manner more comfortable</p>
+<p></p>
+<h3>date, datestr</h3>
+<p>
+<strong>date</strong> filter applicable to values of <strong>DateTime</strong> instances.<br>
+<strong>datestr</strong> filter applicable to values in a string format, supported by the <strong>strtotime</strong> function.<br>
+Both <strong>date</strong> and <strong>datestr</strong> filters accept date format string as a parameter. But in case of empty brackets or without brackets Default DateTime format will be applied.
+</p>
+<code>
+<?= "\"2012-03-04 00:00:00\"|datestr(\"Y/m/d\")"|escape?><br>
+<?= "<? /* will output this */?>"|escape?><br>
+<?=$time|datestr("Y/m/d")?><br>
+</code><br>
+or<br>
+<code>
+<?= "\"2012-03-04 00:00:00\"|datestr()"|escape?><br>
+<?= "<? /* will output this */?>"|escape?><br>
+<?=$time|datestr()?><br>
+</code><br>
+or<br>
+<code>
+<?= "\"2012-03-04 00:00:00\"|datestr"|escape?><br>
+<?= "<? /* will output this */?>"|escape?><br>
+<?=$time|datestr?><br>
+</code><br>
 
+<p></p>
 <div id="bundles"></div>
 <h2>Bundles</h2>
 <p>Bundles is a new  module for this Framework that allows to create separated applications in a public folder.</p>

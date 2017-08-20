@@ -24,6 +24,16 @@
 body{font-size: 18px;    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;}
 h1, h2, h3 {color: #bba112;}
 p{text-align: justify;}
+.gbtn{    display: inline-block;
+    margin-bottom: 1rem;
+    color: rgba(122, 140, 46, 0.7);
+    background-color: rgba(225, 235, 167, 0.08);
+    border-color: rgba(87, 111, 202, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;}
+	font-size:120%;
 </style>
 </head>
 <!--/head-->

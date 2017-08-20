@@ -1,5 +1,7 @@
 <?php
 
+use Kohana\Minion as Minion;
+
 /**
  * The directory in which your application specific resources are located.
  * The application directory must contain the bootstrap.php file.
@@ -51,6 +53,8 @@ define('EXT', '.php');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
+
+//require '../vendor/autoload.php';
 
 /**
  * End of standard configuration! Changing any of the code below should only be
@@ -107,6 +111,9 @@ if ( ! defined('KOHANA_START_MEMORY'))
 	define('KOHANA_START_MEMORY', memory_get_usage());
 }
 
+//sanuich
+//define('VIEWS_FILTERS',1);
+
 // Bootstrap the application
 require APPPATH.'bootstrap'.EXT;
 
@@ -115,7 +122,7 @@ if (PHP_SAPI == 'cli') // Try and load minion
 	class_exists('Minion_Task') OR die('Please enable the Minion module for CLI support.');
 	set_exception_handler(array('Minion_Exception', 'handler'));
 
-	Minion_Task::factory(Minion_CLI::options())->execute();
+	Minion\Task::factory(Minion\CLI::options())->execute();
 }
 else
 {

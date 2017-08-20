@@ -9,6 +9,7 @@ use Kohana\Cache as Cache;
 use Kohana\Date as Date;
 use Kohana\Pagination;
 use Kohana\ORM;
+use Kohana\Twig as Twig;
 
 
 class Welcome extends Controller\Template {
@@ -44,6 +45,8 @@ class Welcome extends Controller\Template {
             'items_per_page' => 5,
         ));*/
 		
+		//$twig = Twig::factory('index');
+		//$twig->name = 'Tom';
 		
 		$user = ORM::factory('user',1);
 
@@ -65,11 +68,16 @@ class Welcome extends Controller\Template {
 			'class'=>'name_div',
 			'option_class'=>'list_el',
 			'placeholder'=>'Input something'));
+			
 		$this->template->content = View::factory("views/index", array(
 		'msg'=>'Hello World!',
 		'input_name'=>$input,
 		'captcha'=>$captcha_html,
-		'result'=>$result));
+		'result'=>$result,
+		'code1'=>"<? \$str|escape ?>",
+		'code2'=>"<?=htmlspecialchars(\$str, ENT_QUOTES, 'UTF-8');?>",
+		'code'=>["<? \$str|escape ?>","<?=htmlspecialchars(\$str, ENT_QUOTES, 'UTF-8');?>"],
+		'time'=>"2012-03-04 00:00:00"), 1);
 		
 	}
 	

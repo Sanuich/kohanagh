@@ -21,8 +21,8 @@ class Controls extends KohanaController {
 	
 	public function action_getdata()
 	{   
-		$cond = (isset($_POST['cond'])) ? $_POST['cond'] : array();
-		$list = $this->fills->$_POST['query']($cond);
+		$cond = (!empty($_POST['cond'])) ? $_POST['cond'] : array();
+		$list = $this->fills->{$_POST['query']}($cond);
 		if(empty($list)) {echo ""; return false;}
 		echo $list[0][$_POST['field_name']];
 		return true;
@@ -30,8 +30,8 @@ class Controls extends KohanaController {
     
     public function action_filloptions()
 	{
-		$cond = (isset($_POST['cond'])) ? $_POST['cond'] : array();
-		$list = $this->fills->$_POST['query']($cond);
+		$cond = (!empty($_POST['cond'])) ? $_POST['cond'] : array();
+		$list = $this->fills->{$_POST['query']}($cond);
 		if(empty($list)) {echo ""; return false;}
 		$data = array();
 		$data['list'] = $list;
@@ -44,8 +44,8 @@ class Controls extends KohanaController {
     
     public function action_filldivs()
 	{
-		$cond = (isset($_POST['cond'])) ? $_POST['cond'] : array();
-		$list = $this->fills->$_POST['query']($cond);
+		$cond = (!empty($_POST['cond'])) ? $_POST['cond'] : array();
+		$list = $this->fills->{$_POST['query']}($cond);
 		if(empty($list)) {echo ""; return false;}
 		$data = array();
 		$data['list'] = $list;
@@ -58,8 +58,8 @@ class Controls extends KohanaController {
     
     public function action_filltable()
 	{
-		$cond = (isset($_POST['cond'])) ? $_POST['cond'] : array();
-		$list = $this->fills->$_POST['query']($cond);
+		$cond = (!empty($_POST['cond'])) ? $_POST['cond'] : array();
+		$list = $this->fills->{$_POST['query']}($cond);
 		if(empty($list)) {echo ""; return false;}
 		$data = array();
 		$data['list'] = $list;
