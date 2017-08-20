@@ -47,11 +47,13 @@ where Sanuich is a vendor's name, Capthcha is a Application name, Model is a par
 <p>So Twig sais: <br><cite>The PHP language is verbose and becomes ridiculously verbose when it comes to output escaping<br>Twig has a very concise syntax, which make templates more readable</cite></p>
 <h3>escape</h3>
 <p>We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters</p>
-<p>To use filters in a View third unnecessary parameter wath added to View::factory function</p>
+<p>To use filters in a View, third unnecessary parameter was added to View::factory function</p>
 <code>
 $html = View::factory('index',$data, true);
 </code>
-<p>by default it has value  - false. To enable filters in a view - set this parameter to any value that !=false. 1 or true.</p>
+<p>by default it has value  - false. To enable filters in a view - set this parameter to any value that !=false. 1 or true. Or define  constant<br>
+<code>define('VIEWS_FILTERS',1);</code><br>
+in index file or bootstrap file to enable filters in all Views by default.</p>
 <h3>Escape</h3>
 <p>Here is example of use escape filter</p>
 <code><?=$code[0]|escape?></code><br>

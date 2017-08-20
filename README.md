@@ -1,7 +1,7 @@
 # Kohana Golden Hair (based on Kohana Framework 3.3.5 version)
 
 ##  About
-Kohana Golden Hair is fork of Kohana Framework, based on Kohana 3.3.5 Framework.
+Kohana Golden Hair is a fork of Kohana Framework, based on Kohana 3.3.5 Framework.
 
 Kohana Golden Hair is using NAMESPACES and supporting latest PSR-4 standart.
 
@@ -13,9 +13,9 @@ Pagination module also added.
 
 ##  The major changes:
 
-- **[Autoloader]** rewrited to [PSR-4] standart, that means that all classes should be declared in a namespaces.
+- **Autoloader** rewrited to [PSR-4] standart, that means that all classes should be declared in a namespaces.
 
-- **[Bundles module]** added
+- **Bundles module** added
 
 - **Kohana\URL::site** function now has a new parameter $subdomain = NULL, if you are extending the class and this function add it.
 
@@ -50,29 +50,29 @@ Or $CaptchaTools = Model::factory('Model\tools'); if Model tools lying in applli
 
 We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters.
 
-To use filters in a View, 3d unnecessary parameter wath added to View::factory function
+To use filters in a View, 3d unnecessary parameter was added to View::factory function
 
 $html = View::factory('index',$data, true);
 by default it has value - false. To enable filters in a view - set this parameter to any value that !=false. 1 or true.
-or define  constanr
+or define  constant
 define('VIEWS_FILTERS',1);
-in index file or bootstrap file.
+in index file or bootstrap file to enable filters in all Views by default.
 
 For now there are [escape] [data] and [datastr] filters. For more details see [kohanagoldenhair.xyz](https://kohanagoldenhair.xyz)
 
 ###  Bundles
-Bundles is a new module for this Framework that allows to create separated applications in a public folder.
+Bundles is a new module for Kohan Golden Hair Framework that allows to create separated applications in a public folder.
 
-It is similar to modules, almost like modules, just allows to create each bundle in a public\bundles\vendor\bundle_name folder
+It is similar to modules, almost like modules, just allows to create each bundle (application) in a public\bundles\vendor\bundle_name folder
 
 That's why actualy was necessary to rewrite autoloader to PSR-4 standart
 
 Some bundles added to default project:
 
-- **Sanuich\AjaxControls** - bundle that allows to create some HTML tags like Table, Select, Div's list and fill them with data
+- **Sanuich\AjaxControls** - bundle that allows to create some HTML tags like Table, Select, Div's list and fill them with data. Require jQuery.
 - **Sanuich\Captcha** - Creates captcha input and check inputed code inside controller
 - **Sanuich\Database** - Some additional sugar: new bundle Sanuich\Database that contains module Database with many useful functions to work with database
-There's a leak of documentation but default application in a app\classes folder is not empty.
+There's a leak of documentation, but default application in a app\classes folder is not empty.
 
 ####  How ot use Database Bundle
 $SanuichDB = Model::factory('Sanuich\Database\Model\DB'); 
