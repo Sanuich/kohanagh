@@ -62,79 +62,7 @@ class View {
 		//new
 		if(!empty($kohana_view_filters))
 		{
-			$var = "\\$(.*)";
-			$str = "[\"{1}\'{1}](.*)[\"{1}\'{1}]";
-			$date_format = '"Y/m/d"';
-			$filters = [
-			'escape'=>['pattern'=>"escape",
-				'replace'=>[
-					'var'=>"htmlspecialchars(\$$1, ENT_QUOTES, 'UTF-8')",
-					'str'=>"htmlspecialchars(\"$1\", ENT_QUOTES, 'UTF-8')"
-					]
-				],
-			'datestr'=>['pattern'=>"datestr\((.+)\)",
-				'replace'=>[
-					'var'=>"date($2, strtotime(\$$1))",
-					'str'=>"date($2, strtotime(\"$1\"))"
-					]
-				],
-			'datestr_default'=>['pattern'=>"datestr\(\)",
-				'replace'=>[
-					'var'=>"date(".$date_format.", strtotime(\$$1))",
-					'str'=>"date(".$date_format.", strtotime(\"$1\"))"
-					]
-				],
-			'datestr_solo'=>['pattern'=>"datestr",
-				'replace'=>[
-					'var'=>"date(".$date_format.", strtotime(\$$1))",
-					'str'=>"date(".$date_format.", strtotime(\"$1\"))"
-					]
-				],
-			'date'=>['pattern'=>"date\((.+)\)",
-				'replace'=>[
-					'var'=>"date($2, \$$1)",
-					'str'=>"date($2, strtotime(\"$1\"))"
-					]
-				],
-			'date_default'=>['pattern'=>"date\(\)",
-				'replace'=>[
-					'var'=>"date(".$date_format.", \$$1)",
-					'str'=>"date(\"Y/m/d\", strtotime(\"$1\"))"
-					]
-				],
-			'date_solo'=>['pattern'=>"date",
-				'replace'=>[
-					'var'=>"date(".$date_format.", \$$1)",
-					'str'=>"date(\"Y/m/d\", strtotime(\"$1\"))"
-					]
-				],
-			'strong'=>['pattern'=>"strong",
-				'replace'=>[
-					'var'=>"<strong><?=$1?></strong>",
-					'str'=>"<strong>$1</strong>"
-					]
-				]				
-			];
-		$view_code = file_get_contents($kohana_view_filename);
-		//escape escape ))
-		$view_code = preg_replace("/([\"\'].*)(\|escape)(.*[\"\']\|escape)/","$1###escape###$3", $view_code);
-		$view_code = preg_replace("/(htmlspecialchars\([\"\'].*)(\|escape)(.*[\"\']\))/","$1###escape###$3", $view_code);
-		
-		$view_code = preg_replace("/([\"\'].*)(\|date)(.*[\"\']\|escape)/","$1###date###$3", $view_code);
-		$view_code = preg_replace("/(htmlspecialchars\([\"\'].*)(\|date)(.*[\"\']\))/","$1###date###$3", $view_code);
-		
-		//filters
-		foreach($filters as $fname=>$filter)
-		{
-			$view_code = preg_replace("/".$str."\|".$filter['pattern']."/",$filter['replace']['str'], $view_code);
-			$view_code = preg_replace("/".$var."\|".$filter['pattern']."/",$filter['replace']['var'], $view_code);
-			
-		}
-		//unescape escape
-		
-		//echo htmlspecialchars($view_code); die();
-		$view_code = str_ireplace("###escape###","|escape",$view_code);
-		$view_code = str_ireplace("###date###","|date",$view_code);
+			$view_code = self::get_view_apply_filters($kohana_view_filename);
 		}
 		// Capture the view output
 		ob_start();
@@ -452,6 +380,91 @@ class View {
 
 		// Combine local and global data and capture the output
 		return self::capture($this->_file, $this->_data, $this->_filters);
+	}
+	
+	protected static function get_view_apply_filters($kohana_view_filename)
+	{
+		$patterns =[];
+		$patterns['var'] = "\\$(.*)";
+		$patterns['str'] = "[\"{1}\'{1}](.*)[\"{1}\'{1}]";
+		$patterns['word'] = "[\s\>](\S+)";
+		$date_format = '"Y/m/d"';
+		$filters = [
+		'escape'=>['pattern'=>"escape",
+			'replace'=>[
+				'var'=>"htmlspecialchars(\$$1, ENT_QUOTES, 'UTF-8')",
+				'str'=>"htmlspecialchars(\"$1\", ENT_QUOTES, 'UTF-8')"
+				]
+			],
+			'datestr'=>['pattern'=>"datestr\((.+)\)",
+				'replace'=>[
+					'var'=>"date($2, strtotime(\$$1))",
+					'str'=>"date($2, strtotime(\"$1\"))"
+					]
+				],
+			'datestr_default'=>['pattern'=>"datestr\(\)",
+				'replace'=>[
+					'var'=>"date(".$date_format.", strtotime(\$$1))",
+					'str'=>"date(".$date_format.", strtotime(\"$1\"))"
+					]
+				],
+			'datestr_solo'=>['pattern'=>"datestr",
+				'replace'=>[
+					'var'=>"date(".$date_format.", strtotime(\$$1))",
+					'str'=>"date(".$date_format.", strtotime(\"$1\"))"
+					]
+				],
+			'date'=>['pattern'=>"date\((.+)\)",
+				'replace'=>[
+					'var'=>"date($2, \$$1)",
+					'str'=>"date($2, strtotime(\"$1\"))"
+					]
+				],
+			'date_default'=>['pattern'=>"date\(\)",
+				'replace'=>[
+					'var'=>"date(".$date_format.", \$$1)",
+					'str'=>"date(\"Y/m/d\", strtotime(\"$1\"))"
+					]
+				],
+			'date_solo'=>['pattern'=>"date",
+				'replace'=>[
+					'var'=>"date(".$date_format.", \$$1)",
+					'str'=>"date(\"Y/m/d\", strtotime(\"$1\"))"
+					]
+				],
+			'strong'=>['pattern'=>"strong",
+				'replace'=>[
+					'word'=>"<strong>$1</strong>"
+					]
+				]				
+			];
+		$view_code = file_get_contents($kohana_view_filename);
+		//escape escape ))
+		$view_code = preg_replace("/([\"\'].*)(\|escape)(.*[\"\']\|escape)/","$1###escape###$3", $view_code);
+		$view_code = preg_replace("/(htmlspecialchars\([\"\'].*)(\|escape)(.*[\"\']\))/","$1###escape###$3", $view_code);
+		
+		$view_code = preg_replace("/([\"\'].*)(\|date)(.*[\"\']\|escape)/","$1###date###$3", $view_code);
+		$view_code = preg_replace("/(htmlspecialchars\([\"\'].*)(\|date)(.*[\"\']\))/","$1###date###$3", $view_code);
+		
+		//filters
+		foreach($filters as $fname=>$filter)
+		{
+			if(!empty($filter['replace']['str']))
+				$view_code = preg_replace("/".$patterns['str']."\|".$filter['pattern']."/",$filter['replace']['str'], $view_code);
+			if(!empty($filter['replace']['var']))
+				$view_code = preg_replace("/".$patterns['var']."\|".$filter['pattern']."/",$filter['replace']['var'], $view_code);
+			if(!empty($filter['replace']['word']))
+				$view_code = preg_replace("/".$patterns['word']."\|".$filter['pattern']."/",$filter['replace']['word'], $view_code);
+				
+			
+		}
+		//unescape escape
+		
+		//echo htmlspecialchars($view_code); die();
+		$view_code = str_ireplace("###escape###","|escape",$view_code);
+		$view_code = str_ireplace("###date###","|date",$view_code);
+		
+		return $view_code;
 	}
 
 }

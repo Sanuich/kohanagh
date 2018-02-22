@@ -123,7 +123,7 @@ class URL {
 				// Validate $host, see if it matches trusted hosts
 				if ( ! static::is_trusted_host($host))
 				{
-					throw new Kohana_Exception(
+					throw new \Kohana\Exception(
 						'Untrusted host :host. If you trust :host, add it to the trusted hosts in the `url` config file.',
 						array(':host' => $host)
 					);

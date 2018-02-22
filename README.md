@@ -13,11 +13,11 @@ Pagination module also added.
 
 ##  The major changes:
 
-- **Autoloader** rewrited to [PSR-4] standart, that means that all classes should be declared in a namespaces.
+- **Autoloader** rewritten to [PSR-4] standart, that means that all classes should be declared in a namespaces.
 
 - **Bundles module** added
 
-- **Kohana\URL::site** function now has a new parameter $subdomain = NULL, if you are extending the class and this function add it.
+- **Kohana\URL::site** function now has a new parameter $subdomain = NULL, if you are extending the class and this function - add it.
 
 - **Kohana\Exception** (old Kohana_Kohana_Exception), all functions that received parameter Exception $e have been replaced to just $e. If you are extending the class verify you have the same.
 

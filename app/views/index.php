@@ -16,15 +16,15 @@
 
 <p>The major changes:</p>
 <ol>
-<li>autoloader rewrited to PSR-4 standart, that means that all classes should be declared in a <a href="#namespaces">namespaces</a>.</li>
+<li>autoloader rewritten to PSR-4 standart, that means that all classes should be declared in a <a href="#namespaces">namespaces</a>.</li>
 <li><a href="#bundles">Bundles module</a> added</li>
-<li><strong>Kohana\URL::site</strong> function now has a new parameter <code class="highlighter-rouge">$subdomain = NULL</code>, if you are extending the class and this function add it.</li>
+<li><strong>Kohana\URL::site</strong> function now has a new parameter <code class="highlighter-rouge">$subdomain = NULL</code>, if you are extending the class and this function - add it.</li>
 <li><strong>Kohana\Exception (old Kohana_Kohana_Exception)</strong>, all functions that received parameter Exception $e have been replaced to just $e. If you are extending the class verify you have the same.</li>
 <li><b>Module encrypt</b>, now encryption works as a module,<br> if you are using new Encrypt or similar you need to enable the module in your bootstrap ex: 'encrypt' => MODPATH.'Kohana\encrypt',</li>
 <li><strong>Kohana\ORM</strong> module fixed to work with PDO database driver</li>
 <li><strong><a href="#filters">Views Filters</a></strong>. View class was extended with Filters (like Smarty or Twig).</li>
 </ol>
-<p>All modules was reworked for maximal compatibility with old code but Some of them still need to be tested. For example </p>
+<p>All modules was reworked for maximal compatibility with old code but Some of them still need to be tested.</p>
 
 <div id="namespaces"></div>
 <h2>Namespaces AND PSR-4</h2>
@@ -45,7 +45,7 @@ where Sanuich is a vendor's name, Capthcha is a Application name, Model is a par
 <div id="filters"></div>
 <h2>Views Filters</h2>
 <p>So Twig sais: <br><cite>The PHP language is verbose and becomes ridiculously verbose when it comes to output escaping<br>Twig has a very concise syntax, which make templates more readable</cite></p>
-<h3>escape</h3>
+<br>
 <p>We decided to fill some emptiness with a few lines of code. So now you can use in a Views some filters</p>
 <p>To use filters in a View, third unnecessary parameter was added to View::factory function</p>
 <code>

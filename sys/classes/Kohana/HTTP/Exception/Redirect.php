@@ -3,6 +3,7 @@
 namespace Kohana\HTTP\Exception;
 
 use Kohana\HTTP as HTTP;
+use Kohana\URL as URL;
 
 /**
  * Redirect HTTP exception class. Used for all [HTTP_Exception]'s where the status
@@ -16,7 +17,7 @@ use Kohana\HTTP as HTTP;
  * @copyright  (c) 2008-2012 Kohana Team
  * @license    http://kohanaframework.org/license
  */
-abstract class Redirect extends \Kohana\HTTP\Exception\Expected {
+abstract class Redirect extends Expected {
 
 	/**
 	 * Specifies the URI to redirect to.
@@ -31,7 +32,7 @@ abstract class Redirect extends \Kohana\HTTP\Exception\Expected {
 		if (strpos($uri, '://') === FALSE)
 		{
 			// Make the URI into a URL
-			$uri = \URL::site($uri, TRUE, ! empty(\Kohana::$index_file));
+			$uri = URL::site($uri, TRUE, ! empty(\Kohana\Core::$index_file));
 		}
 
 		$this->headers('Location', $uri);

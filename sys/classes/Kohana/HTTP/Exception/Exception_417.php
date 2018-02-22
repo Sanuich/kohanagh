@@ -1,6 +1,6 @@
 <?php 
 
-namespace Kohana\HTTP;
+namespace Kohana\HTTP\Exception;
 
 use Kohana\HTTP as HTTP;
 

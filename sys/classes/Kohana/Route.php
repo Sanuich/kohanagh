@@ -109,7 +109,7 @@ class Route {
 	{
 		if ( ! isset(self::$_routes[$name]))
 		{
-			throw new \Exception('The requested route does not exist: :route',
+			throw new Exception('The requested route does not exist: :route',
 				array(':route' => $name));
 		}
 

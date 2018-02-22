@@ -3,6 +3,7 @@
 namespace Kohana\HTTP\Exception;
 
 use Kohana\HTTP as HTTP;
+use Kohana\Response as Response;
 
 /**
  * "Expected" HTTP exception class. Used for all [HTTP_Exception]'s where a standard
@@ -38,7 +39,7 @@ abstract class Expected extends \Kohana\HTTP\Exception {
 		parent::__construct($message, $variables, $previous);
 
 		// Prepare our response object and set the correct status code.
-		$this->_response = \Response::factory()
+		$this->_response = Response::factory()
 			->status($this->_code);
 	}
 
@@ -54,7 +55,7 @@ abstract class Expected extends \Kohana\HTTP\Exception {
 	{
 		$result = $this->_response->headers($key, $value);
 
-		if ( ! $result instanceof \Response)
+		if ( ! $result instanceof Response)
 			return $result;
 
 		return $this;
