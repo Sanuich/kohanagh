@@ -36,10 +36,11 @@ class DB extends Model
 		{
 			foreach($data as $key=>$val){
 				if(gettype($val)=="string") $data[$key] = "'".addslashes($val)."'";
-				if(gettype($val)=="array" || gettype($val)=="object" || gettype($val)=="resource") unset($data[$key]); 
+				if(gettype($val)=="array" || gettype($val)=="object" || gettype($val)=="resource") unset($data[$key]);
+				if($val===NULL) $data[$key]='NULL';
 			}
-			
-			$qrows = implode(",",array_keys($data));
+
+			$qrows = "`".implode("`,`",array_keys($data))."`";
 			$qvalues = implode(",",$data);
 			
 			if($replace) $q="REPLACE INTO ";
@@ -95,17 +96,17 @@ class DB extends Model
 		else array();
 	}
 	
-	public function dbidselect($q = "")//select array, set name ofeach record with id field
+	public function dbidselect($q = "", $id="id")//select array, set name ofeach record with id field
 	{
 		$result = $this->dbselect($q);
-		if(count($result)>0 && isset($result[0]['id']))
+		if(count($result)>0 && isset($result[0][$id]))
 		{
 			$result2 = array();
 			foreach($result as $res)
 			{
 				$row = $res;
-				unset($row['id']);
-				$result2[$res['id']] = $row;
+				unset($row[$id]);
+				$result2[$res[$id]] = $row;
 			}
 			return $result2;			
 		}
@@ -123,6 +124,23 @@ class DB extends Model
 				$row = $res;
 				unset($row['id']);
 				$result2[$res['id']] = $row;
+			}
+			return $result2;			
+		}
+		else return false;
+	}
+	
+	public function dbkeyselect($q = "", $key="id")//выбирает массив, нумерует массив по полю $key в запросе
+	{
+		$result = $this->dbselect($q);
+		if(count($result)>0 && isset($result[0][$key]))
+		{
+			$result2 = array();
+			foreach($result as $res)
+			{
+				$row = $res;
+				unset($row[$key]);
+				$result2[$res[$key]] = $row;
 			}
 			return $result2;			
 		}
@@ -164,11 +182,12 @@ class DB extends Model
 			$set_data = $data;
 			unset($set_data[$key]);
 			foreach($set_data as $id=>$val){				
-				if(gettype($val)=="array" || gettype($val)=="object" || gettype($val)=="resource") unset($set_data[$key]);
+				if(gettype($val)=="array" || gettype($val)=="object" || gettype($val)=="resource") 
+					unset($set_data[$key]);
 				else{
 					if(gettype($val)=="string" && $val!=='now()')	
-						$set_data[$id] = $id."='".addslashes($val)."'";
-					else $set_data[$id] = $id."=".$val;
+						$set_data[$id] = "`".$id."`='".addslashes($val)."'";
+					else $set_data[$id] = "`".$id."`=".$val;
 				}
 			}
 			$qset = "SET ".implode(",",$set_data);
