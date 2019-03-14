@@ -97,5 +97,5 @@ dbinsert_data($tbl, $data, $replace); insert or replace $data array in a table $
 dbupdate_data($tbl, $data, $key); update table $tbl with record array $data WHERE $key==$data[$key]
 AND MORE...
 
-##Official website
+## Official website
 http://kohanagoldenhair.xyz
