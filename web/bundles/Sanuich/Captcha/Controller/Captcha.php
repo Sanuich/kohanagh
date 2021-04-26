@@ -52,4 +52,18 @@ class Captcha extends KohanaController {
         $this->response->headers('Content-Type', 'image/jpeg');
         imagejpeg($im);
     }
+
+    public action_captcha_check()
+    {
+    	if(!empty($_POST['code']) && !empty($_POST['captcha']) && $_POST['captcha'] == $CaptchaTools->dsCrypt($_POST['code'],1))
+    	{
+    		echo json_encode(array('res'=>1,'ans'=>'right'));  
+			return false;
+    	}
+    	else
+    	{
+    		echo json_encode(array('res'=>0,'ans'=>'wrong'));  
+			return false;
+    	}
+    }
 }

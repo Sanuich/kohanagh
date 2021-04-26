@@ -151,9 +151,10 @@ Kohana::modules(array(
 /*
 Bundles
 */
+Bundles::set(array('vendor'=>'Sanuich','bundle'=>'Database'));
 Bundles::set(array('vendor'=>'Sanuich','bundle'=>'AjaxControls'));
 Bundles::set(array('vendor'=>'Sanuich','bundle'=>'Captcha'));
-Bundles::set(array('vendor'=>'Sanuich','bundle'=>'Database'));
+Bundles::set(array('vendor'=>'Sanuich','bundle'=>'Auth'));
 
 Bundles::read_routes();
 

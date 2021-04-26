@@ -19,7 +19,7 @@ return array
 			 * Ports and sockets may be appended to the hostname.
 			 */
 			'hostname'   => 'localhost',
-			'database'   => 'info',
+			'database'   => 'DBName',
 			'username'   => ($_SERVER['REMOTE_ADDR']=='127.0.0.1')?'root':'',
 			'password'   => ($_SERVER['REMOTE_ADDR']=='127.0.0.1')?'':'',
 			'persistent' => FALSE,
@@ -40,9 +40,11 @@ return array
 			 * string   password    database password
 			 * boolean  persistent  use persistent connections?
 			 */
-			'dsn'        => 'mysql:host=localhost;dbname=info',
-			'username'   => ($_SERVER['REMOTE_ADDR']=='127.0.0.1')?'root':'',
-			'password'   => ($_SERVER['REMOTE_ADDR']=='127.0.0.1')?'':'',
+			'hostname'   => 'localhost',
+			'database'   => 'DBName',
+			'dsn'        => 'mysql:host=localhost;dbname=DBName',
+			'username'   => (!isset($_SERVER['REMOTE_ADDR']) || $_SERVER['REMOTE_ADDR']=='127.0.0.1')?'root':'',
+			'password'   => (!isset($_SERVER['REMOTE_ADDR']) || $_SERVER['REMOTE_ADDR']=='127.0.0.1')?'':'',
 			'persistent' => FALSE,
 			'options'    => array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'),
 		),

@@ -154,7 +154,7 @@ class PDO extends Database {
 		{
 			$result = $this->_connection->query($sql);
 		}
-		catch (Exception $e)
+		catch (\PDOException $e)
 		{
 			if (isset($benchmark))
 			{
@@ -163,7 +163,7 @@ class PDO extends Database {
 			}
 
 			// Convert the exception in a database exception
-			throw new Database_Exception(':error [ :query ]',
+			throw new Exception(':error [ :query ]',
 				array(
 					':error' => $e->getMessage(),
 					':query' => $sql

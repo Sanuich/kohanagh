@@ -1,0 +1,26 @@
+/*
+html{overflow:hidden!important;}
+body{padding-top:45px;
+overflow:hidden!important;}*/
+#main{margin:0;}
+#item_name{width:500px;float:left;font-size:24px!important;line-height:24px!important;font-weight:normal!important;padding:0!important;margin:11px 0 0 15px!important;letter-spacing:-1px;}
+#tray .remove{width:200px;float:right;text-align:right;margin-top:8px;}
+#tray .remove a{color:#333!important;text-shadow:0 1px 1px rgba(255,255,255,0.75)!important;}
+#preview{border:none;}
+#mask{position:absolute;left:0;top:0;z-index:119000;background-color:#000;display:none;}
+#subscribe_dialog{width:580px;padding:6px;background-color:rgba(0,0,0,0.4);font:normal 13px "Verdana","Arial",sans-serif;position:absolute;left:0;top:0;display:none;z-index:119999;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px;}
+#subscribe_dialog .shell{width:580px;overflow:hidden;background:#E2E2E2 url("//d85wutc1n854v.cloudfront.net/live/imgs/dark_bg.jpg");-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+#subscribe_dialog .topbar{width:auto;margin-bottom:10px;overflow:hidden;}
+#subscribe_dialog .close{display:block;width:60px;margin-top:5px;margin-right:5px;float:right;padding:4px 8px;background-color:#333;color:#fff;text-align:center;text-decoration:none;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+#subscribe_dialog .close:hover{background-color:#555;color:#fff;}
+#subscribe_dialog .close:active{background-color:#222;color:#fff;}
+#subscribe_dialog .victory{width:auto;height:42px;line-height:42px!important;padding:0 0 0 62px;margin:5px 0 10px 0;color:#fff;font-size:18px;font-weight:bold;}
+#subscribe_dialog .urge{padding:0 20px;margin-bottom:10px;}
+#subscribe_dialog .inner{width:auto;height:400px;overflow:hidden;margin:0 10px 10px 10px;}
+#greeting{background:#000;background:rgba(0,0,0,0.9);bottom:0;color:#fff;display:none;font-family:Tahoma,Arial,sans-serif;font-size:16px;height:59px;overflow:hidden;position:fixed;width:100%;z-index:99999;}
+#greeting a{color:#fff;font-weight:bold;text-decoration:underline;}
+#greeting a:hover{text-decoration:underline;}
+#greeting p{margin:20px 0;}
+#greeting img{float:left;margin:10px 10px 10px 10px;}
+#greeting .close-button{cursor:pointer;float:right;font-weight:bold;margin:20px 20px 0 5px;}
+#greeting .close-button:hover{text-decoration:underline;}

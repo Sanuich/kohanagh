@@ -1,0 +1,44 @@
+<?php 
+
+namespace Sanuich\Modules\Model;
+
+use Kohana\Model as KohanaModel;
+
+class [module] extends KohanaModel 
+{
+	public $name = '[tablename]';
+	
+	public function get($data)
+	{
+		$Mdb = KohanaModel::factory('Sanuich\Database\Model\DB');
+		$q = "SELECT * FROM ".$this->name." WHERE id>0 ";
+		foreach($data as $key=>$val) $q.=" AND ".$key."='".$val."' ";
+		return $this->Mdb->dbrow($q);
+	}
+	
+	public function create($data)
+	{
+		$Mdb = KohanaModel::factory('Sanuich\Database\Model\DB');
+		unset($data['id']);
+		unset($data['uid']);
+		unset($data['changed']);
+		unset($data['changed_by']);
+		return $this->Mdb->dbinsert_data($this->name, $data);
+	}
+	
+	public function update($data)
+	{
+		$Mdb = KohanaModel::factory('Sanuich\Database\Model\DB');
+		unset($data['id']);
+		unset($data['uid']);
+		unset($data['changed']);
+		unset($data['changed_by']);
+		return $this->Mdb->dbupdate_data($this->name, $data);
+	}
+	
+	public function delete($id)
+	{
+		$Mdb = KohanaModel::factory('Sanuich\Database\Model\DB');
+		return $this->Mdb->dbupdate("DELETE FROM ".$this->name." WHERE id=".$id);
+	}
+}
