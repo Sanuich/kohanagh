@@ -215,6 +215,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 *
 	 * @return  integer
 	 */
+	#[\ReturnTypeWillChange]
 	public function count()
 	{
 		return $this->_total_rows;
@@ -231,6 +232,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 * @param   int     $offset
 	 * @return  boolean
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetExists($offset)
 	{
 		return ($offset >= 0 AND $offset < $this->_total_rows);
@@ -244,6 +246,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 * @param   int     $offset
 	 * @return  mixed
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet($offset)
 	{
 		if ( ! $this->seek($offset))
@@ -262,6 +265,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 * @return  void
 	 * @throws  Kohana_Exception
 	 */
+	#[\ReturnTypeWillChange]
 	final public function offsetSet($offset, $value)
 	{
 		throw new Exception('Database results are read-only');
@@ -276,6 +280,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 * @return  void
 	 * @throws  Kohana_Exception
 	 */
+	#[\ReturnTypeWillChange]
 	final public function offsetUnset($offset)
 	{
 		throw new Exception('Database results are read-only');
@@ -288,6 +293,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 *
 	 * @return  integer
 	 */
+	#[\ReturnTypeWillChange]
 	public function key()
 	{
 		return $this->_current_row;
@@ -300,6 +306,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 *
 	 * @return  $this
 	 */
+	#[\ReturnTypeWillChange]
 	public function next()
 	{
 		++$this->_current_row;
@@ -313,6 +320,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 *
 	 * @return  $this
 	 */
+	#[\ReturnTypeWillChange]
 	public function prev()
 	{
 		--$this->_current_row;
@@ -326,6 +334,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 *
 	 * @return  $this
 	 */
+	#[\ReturnTypeWillChange]
 	public function rewind()
 	{
 		$this->_current_row = 0;
@@ -339,6 +348,7 @@ abstract class Result implements \Countable, \Iterator, \SeekableIterator, \Arra
 	 *
 	 * @return  boolean
 	 */
+	#[\ReturnTypeWillChange]
 	public function valid()
 	{
 		return $this->offsetExists($this->_current_row);

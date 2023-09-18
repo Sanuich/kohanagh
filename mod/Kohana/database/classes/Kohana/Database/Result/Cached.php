@@ -33,6 +33,7 @@ class Cached extends Database\Result {
 		return $this;
 	}
 
+	#[\ReturnTypeWillChange]
 	public function seek($offset)
 	{
 		if ($this->offsetExists($offset))
@@ -47,6 +48,7 @@ class Cached extends Database\Result {
 		}
 	}
 
+	#[\ReturnTypeWillChange]
 	public function current()
 	{
 		// Return an array of the row
