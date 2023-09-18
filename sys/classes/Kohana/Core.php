@@ -322,7 +322,7 @@ class Core {
 		}
 
 		// Determine if the extremely evil magic quotes are enabled
-	 	self::$magic_quotes = (bool) get_magic_quotes_gpc();
+	 	self::$magic_quotes = (function_exists("get_magic_quotes_gpc")) ? (bool) get_magic_quotes_gpc() : false;
 
 		// Sanitize all request variables
 		$_GET    =  self::sanitize($_GET);

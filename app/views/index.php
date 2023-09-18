@@ -73,9 +73,9 @@ twig:<br>
 PHP:<br>
 <code><?="<h1>Members</h1>"|escape;?><br>
 <?="<ul>"|escape;?><br>
-<?=" <? foreach(\$users as \$user){?>"|escape;?><br>
+<?=" <?php foreach(\$users as \$user){?>"|escape;?><br>
 <?="  <li><?=\$user['username']?></li>"|escape;?><br>
-<?=" <? }?>"|escape;?><br>
+<?=" <?php }?>"|escape;?><br>
 <?="</ul>"|escape;?>
 </code><br>
 <p>In notepad++ (and other editors) symbols { and } - hilighted. So working with PHP code this manner more comfortable</p>
