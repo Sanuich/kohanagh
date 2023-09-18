@@ -10,7 +10,7 @@
 <h2>About</h2>
 <p>Kohana Golden Hair is fork of Kohana Framework, based on Kohana 3.3.5 Framework.</p>
 <p>Kohana Golden Hair is using NAMESPACES and supporting latest PSR-4 standart</p>
-<p>Ready to work with PHP 8.0.x version. PHP 5.4 - 8.0.x compatibility</p>
+<p>Ready to work with PHP 8.1.x version. PHP 5.4 - 8.1.x compatibility</p>
 <p>Released under a <a href="LICENSE.md">BSD license</a>, Kohana Golden Hair can be used legally for any open source, commercial, or personal project.</p>
 <p><b>Pagination module</b> also added.</p>
 
