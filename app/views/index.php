@@ -10,21 +10,21 @@
 <h2>About</h2>
 <p>Kohana Golden Hair is fork of Kohana Framework, based on Kohana 3.3.5 Framework.</p>
 <p>Kohana Golden Hair is using NAMESPACES and supporting latest PSR-4 standart</p>
-<p>Updated to work with PHP 7.0.x version. PHP 5.4 - 7.0.x compatibility</p>
+<p>Ready to work with PHP 8.0.x version. PHP 5.4 - 8.0.x compatibility</p>
 <p>Released under a <a href="LICENSE.md">BSD license</a>, Kohana Golden Hair can be used legally for any open source, commercial, or personal project.</p>
 <p><b>Pagination module</b> also added.</p>
 
 <p>The major changes:</p>
 <ol>
-<li>autoloader rewritten to PSR-4 standart, that means that all classes should be declared in a <a href="#namespaces">namespaces</a>.</li>
+<li>Autoloader rewritten to PSR-4 standart, that means that all classes should be declared in a <a href="#namespaces">namespaces</a>.</li>
 <li><a href="#bundles">Bundles module</a> added</li>
 <li><strong>Kohana\URL::site</strong> function now has a new parameter <code class="highlighter-rouge">$subdomain = NULL</code>, if you are extending the class and this function - add it.</li>
-<li><strong>Kohana\Exception (old Kohana_Kohana_Exception)</strong>, all functions that received parameter Exception $e have been replaced to just $e. If you are extending the class verify you have the same.</li>
+<li><strong>Kohana\Exception (old Kohana_Kohana_Exception)</strong>, all functions that are received parameter Exception $e has been replaced to just $e. If you are extending the class verify you have the same.</li>
 <li><b>Module encrypt</b>, now encryption works as a module,<br> if you are using new Encrypt or similar you need to enable the module in your bootstrap ex: 'encrypt' => MODPATH.'Kohana\encrypt',</li>
 <li><strong>Kohana\ORM</strong> module fixed to work with PDO database driver</li>
 <li><strong><a href="#filters">Views Filters</a></strong>. View class was extended with Filters (like Smarty or Twig).</li>
 </ol>
-<p>All modules was reworked for maximal compatibility with old code but Some of them still need to be tested.</p>
+<p>All modules where reworked for maximal compatibility with old code but Some of them still need to be tested.</p>
 
 <div id="namespaces"></div>
 <h2>Namespaces AND PSR-4</h2>
