@@ -53,7 +53,7 @@ class Captcha extends KohanaController {
         imagejpeg($im);
     }
 
-    public action_captcha_check()
+    public function action_captcha_check()
     {
     	if(!empty($_POST['code']) && !empty($_POST['captcha']) && $_POST['captcha'] == $CaptchaTools->dsCrypt($_POST['code'],1))
     	{

@@ -1,13 +1,23 @@
+# Project files
+.idea
+nbproject
+*.iml
+out
+gen
+
+# Composer
+/vendor/
+composer.lock
+
 /log/*
 /cgi-bin/*
 /private/*
 /tmp/*
 /ssl/*
 /webdav/*
+
 # CACHE
 /app/cache/*
 /app/logs/*
-/web/images/tmp/*
-/web/images/products/*
 *.zip
 *.gz
