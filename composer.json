@@ -1,0 +1,22 @@
+{
+    "name": "Sanuich/kohanagh",
+    "description": "Golden Hair Framework - PHP-7 compatible fork of Kohana framework",
+    "license": "BSD",
+    "keywords": [
+      "kohana",
+      "kohana-php7",
+      "goldenhair",
+      "kohanagh"
+    ],
+    "homepage": "https://kohanagoldenhair.xyz/",
+    "authors": [
+      {
+        "name": "Sanuich",
+        "email": "sanuich@gmail.com",
+        "role": "developer"
+      }
+    ],
+    "require": {
+      "php": ">=7.0"
+    }
+  }
