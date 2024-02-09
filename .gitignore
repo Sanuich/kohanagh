@@ -17,5 +17,5 @@ composer.lock
 /webdav/*
 
 # CACHE
-#/app/cache/*
-#/app/logs/*
+/app/cache/*
+/app/logs/*
